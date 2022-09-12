@@ -42,6 +42,8 @@ const deleteIssue = id => {
     issue.id !== id;
   } ) //**problem here */
   localStorage.setItem('issues', JSON.stringify(remainingIssues));
+
+  fetchIssues();
 }
 
 const fetchIssues = () => {
@@ -59,9 +61,9 @@ const fetchIssues = () => {
       issuesList.innerHTML +=   `<div class="well">
                                 <h6>Issue ID: ${id} </h6>
                                 <p><span class="label label-info"> ${status} </span></p>
-                                <h3> ${description} </h3>
+                                <h3> ${description ? description : "N/A"} </h3>
                                 <p><span class="glyphicon glyphicon-time"></span> ${severity}</p>
-                                <p><span class="glyphicon glyphicon-user"></span> ${assignedTo}</p>
+                                <p><span class="glyphicon glyphicon-user"></span> ${assignedTo ? assignedTo : 'N/A'}</p>
                                 <a href="#" onclick="setStatusClosed(${id})" class="btn btn-warning">Close</a>
                                 <a href="#" onclick="deleteIssue(${id})" class="btn btn-danger">Delete</a>
                                 </div>`;
