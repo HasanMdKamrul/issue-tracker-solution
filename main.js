@@ -35,8 +35,12 @@ const setStatusClosed = id => {
 }
 
 const deleteIssue = id => {
+
   const issues = JSON.parse(localStorage.getItem('issues'));
-  const remainingIssues = issues.filter( issue.id !== id ) //**problem here */
+  const remainingIssues = issues.filter( issue=> {
+   
+    issue.id !== id;
+  } ) //**problem here */
   localStorage.setItem('issues', JSON.stringify(remainingIssues));
 }
 
