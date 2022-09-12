@@ -37,13 +37,12 @@ const setStatusClosed = id => {
   fetchIssues();
 }
 
-const deleteIssue = id => {
-
+const deleteIssue = itemId => {
   const issues = JSON.parse(localStorage.getItem('issues'));
-  const remainingIssues = issues.filter( issue=> {
-   
-    issue.id !== id;
-  } ) //**problem here */
+  const remainingIssues = issues.filter(issue => {
+    const {id} = issue;
+    return (+id !== itemId);
+  })
   localStorage.setItem('issues', JSON.stringify(remainingIssues));
 
   fetchIssues();
