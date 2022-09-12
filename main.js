@@ -1,6 +1,7 @@
 document.getElementById('issueInputForm').addEventListener('submit', submitIssue);
 
 function submitIssue(e) {
+  // console.count()
   const getInputValue = id => document.getElementById(id).value;
   const description = getInputValue('issueDescription');
   const severity = getInputValue('issueSeverity');
@@ -21,17 +22,21 @@ function submitIssue(e) {
   e.preventDefault();
 }
 
-const closeIssue = id => {
-  const issues = JSON.parse(localStorage.getItem('issues'));
-  const currentIssue = issues.find(issue => issue.id === id);
+const setStatusClosed = id => {
+  let issues = JSON.parse(localStorage.getItem('issues'));
+  // console.log(id)
+  // console.table(issues);
+  const currentIssue = issues.find(issue => issue.id === id + '');
+  console.log(currentIssue)
   currentIssue.status = 'Closed';
+  // console.log(currentIssue);
   localStorage.setItem('issues', JSON.stringify(issues));
   fetchIssues();
 }
 
 const deleteIssue = id => {
   const issues = JSON.parse(localStorage.getItem('issues'));
-  const remainingIssues = issues.filter( issue.id !== id )
+  const remainingIssues = issues.filter( issue.id !== id ) //**problem here */
   localStorage.setItem('issues', JSON.stringify(remainingIssues));
 }
 
